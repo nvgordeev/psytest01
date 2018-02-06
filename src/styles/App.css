@@ -9,9 +9,12 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
   padding: 20px;
   color: white;
+}
+
+.App-body {
+  margin-top:30px;
 }
 
 .App-title {
@@ -20,6 +23,16 @@
 
 .App-intro {
   font-size: large;
+}
+
+.controlPanel {
+  margin: 30px;
+}
+
+.controlPanel button {
+  width: 100%;
+  margin: 10px;
+  height:80px;
 }
 
 @keyframes App-logo-spin {
