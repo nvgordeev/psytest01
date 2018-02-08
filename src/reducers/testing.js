@@ -4,7 +4,6 @@ const initialState = {
     personId: null,
     questions: [],
     result: null,
-    complete: false
 }
 
 export function testingReducer(state=initialState, action) {
