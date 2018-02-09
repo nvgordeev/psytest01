@@ -4,7 +4,7 @@ export const ROUTES =  {
     OVERVIEW: 'overview/',
     TESTING: {
         REGISTRATION: '/testing/register/',
-        QUESTION: '/testing/question/',
+        TEST: '/testing/test/',
         RESULT: '/testing/result/',
     }
 }

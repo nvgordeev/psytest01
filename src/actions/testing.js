@@ -1,12 +1,11 @@
 import * as ACIONS from '../constants/actions'
-import {loadQuestions} from "./question";
 
 export const startTesting = (person) => dispatch => {
     dispatch({type: ACIONS.TEST_PROCESS_START, data: {person}})
 }
 
-export const acceptAnswer = (questionId, answerId) => dispatch => {
-    dispatch({type: ACIONS.TEST_PROCESS_ANSWER, data: {question: {questionId, answerId}}})
+export const acceptAnswer = (scale, answer) => dispatch => {
+    dispatch({type: ACIONS.TEST_PROCESS_ANSWER, data: {scale, answer}})
 }
 
 export const finishTesting = (result) => dispatch => {

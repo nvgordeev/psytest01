@@ -23,10 +23,12 @@ class Registration extends Component {
 
     handleStart = () => {
         this.props.startTesting(this.state.data)
-        this.props.history.push(ROUTES.TESTING.QUESTION + '0')
+        this.props.history.push(ROUTES.TESTING.TEST)
     }
 
     render() {
+        const {data} = this.state
+        const formValid = data.gender && data.fullName && data.birthDate
         return (
             <div className="row">
                 <div className="col-12">
@@ -36,10 +38,11 @@ class Registration extends Component {
                     <Input name='fullName' title='Фамилия, Имя, Отчество' onChange={this.handleFieldChange}/>
                     <Input name='birthDate' type='date' title='Дата рождения' onChange={this.handleFieldChange}/>
                     <Select name='gender' title='Пол' onChange={this.handleFieldChange}>
+                        <option value={''}>Выберите</option>
                         <option value={'m'}>Мужской</option>
                         <option value={'f'}>Женский</option>
                     </Select>
-                    <button onClick={this.handleStart} className="btn btn-lg btn-primary">Начать тест</button>
+                    {formValid && <button onClick={this.handleStart} className="btn btn-lg btn-primary">Начать тест</button>}
                 </div>
             </div>
         )

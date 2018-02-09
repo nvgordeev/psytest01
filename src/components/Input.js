@@ -7,6 +7,7 @@ export default ({name, placeholder, title, type, value, onChange, ...props }) =>
             type={type || 'text'}
             className="form-control"
             id={name}
+            name={name}
             placeholder={placeholder}
             value={value}
             onChange={onChange}

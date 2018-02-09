@@ -6,6 +6,7 @@ export default ({name, title, value, onChange, children, ...props }) => (
         <select
             className="form-control"
             id={name}
+            name={name}
             value={value}
             onChange={onChange}
             {...props}
