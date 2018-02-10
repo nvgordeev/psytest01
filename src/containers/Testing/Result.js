@@ -21,9 +21,22 @@ class Result extends Component {
                     <h2>Результат тестирования</h2>
                 </div>
                 <div className='col-12'>
-                    <p>ФИО: {person.fullName}</p>
-                    <p>Дата рождения: {person.birthDate}</p>
-                    <p>Пол: {person.gender === 'm'? "мужской" : "женский"}</p>
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <td>ФИО: </td>
+                                <td>{person.fullName}</td>
+                            </tr>
+                            <tr>
+                                <td>Дата рождения: </td>
+                                <td>{person.birthDate}</td>
+                            </tr>
+                            <tr>
+                                <td>Пол: </td>
+                                <td>{person.gender === 'm'? "мужской" : "женский"}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div className='col-12'>
                     <p><strong>Общий балл: {this.props.testing.total}</strong></p>

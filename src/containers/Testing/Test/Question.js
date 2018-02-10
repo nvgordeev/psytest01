@@ -30,7 +30,7 @@ class Question extends Component {
         return (
             <div className="row">
                 <div className='col-12'>
-                    <h2>{item.text}</h2>
+                    <h2>Выберите верное утверждение</h2>
                 </div>
                 <div className='col-12'>
                     {item.answers.map(a => (

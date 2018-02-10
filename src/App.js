@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Система психологического тестирования</h1>
+          <h1 className="App-title">Опросник детской депрессии по методике М. Ковач</h1>
         </header>
         <main className="AppBody">
             <div className="container">
