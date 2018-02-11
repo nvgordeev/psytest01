@@ -2,15 +2,15 @@ import {apiActionCreator} from "./actionCreator";
 import {API_ACTION_STATUS, API_ACTION_TYPE} from "../constants";
 import API from '../api'
 
-const OBJECT_NAME = 'question'
+const OBJECT_NAME = 'result'
 
-export const loadQuestions = () => dispatch => {
+export const loadResults = () => dispatch => {
         dispatch(apiActionCreator({
             actionType: API_ACTION_TYPE.LOAD_LIST,
             actionStatus: API_ACTION_STATUS.REQUEST,
             objectName: OBJECT_NAME
         }))
-        return API.questions.loadList().then(
+        return API.results.loadList().then(
             (data) => {
                 dispatch(apiActionCreator({
                     actionType: API_ACTION_TYPE.LOAD_LIST,
@@ -32,13 +32,13 @@ export const loadQuestions = () => dispatch => {
         )
 }
 
-export const saveQuestions = (data) => dispatch => {
+export const saveResults = (data) => dispatch => {
         dispatch(apiActionCreator({
             actionType: API_ACTION_TYPE.SAVE_LIST,
             actionStatus: API_ACTION_STATUS.REQUEST,
             objectName: OBJECT_NAME
         }))
-        return API.questions.saveList(data).then(
+        return API.results.saveList(data).then(
             (data) => {
                 dispatch(apiActionCreator({
                     actionType: API_ACTION_TYPE.SAVE_LIST,
@@ -59,27 +59,9 @@ export const saveQuestions = (data) => dispatch => {
         )
 }
 
-export const createQuestion = (data) => dispatch => {
+export const createResult = (data) => dispatch => {
     dispatch(apiActionCreator({
             actionType: API_ACTION_TYPE.CREATE,
-            actionStatus: API_ACTION_STATUS.SUCCESS,
-            objectName: OBJECT_NAME,
-            data
-        }))
-}
-
-export const updateQuestion = (data) => dispatch => {
-    dispatch(apiActionCreator({
-            actionType: API_ACTION_TYPE.UPDATE,
-            actionStatus: API_ACTION_STATUS.SUCCESS,
-            objectName: OBJECT_NAME,
-            data
-        }))
-}
-
-export const deleteQuestion = (data) => dispatch => {
-    dispatch(apiActionCreator({
-            actionType: API_ACTION_TYPE.DELETE,
             actionStatus: API_ACTION_STATUS.SUCCESS,
             objectName: OBJECT_NAME,
             data

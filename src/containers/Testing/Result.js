@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import withRouter from "react-router-dom/es/withRouter";
 import {connect} from "react-redux";
 import {ROUTES} from "../../constants/routes";
+import {loadResults, saveResults} from "../../actions/result";
 
 class Result extends Component {
 
@@ -54,6 +55,14 @@ function mapStateToProps(state) {
     return {
         questions: state.questions,
         testing: state.testing,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createResults: dispatch(saveResults()),
+        saveResults: dispatch(saveResults()),
+        loadResults: dispatch(loadResults())
     }
 }
 

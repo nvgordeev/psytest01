@@ -5,6 +5,5 @@ import {testingReducer} from "./testing";
 export default combineReducers({
     questions: apiReducerFactory('question'),
     results: apiReducerFactory('result'),
-    persons: apiReducerFactory('person'),
     testing: testingReducer
 })
