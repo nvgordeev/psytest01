@@ -13,11 +13,10 @@ export function testingReducer(state=initialState, action) {
         case ACTION.TEST_PROCESS_START:
             return {...initialState, person: data.person}
         case ACTION.TEST_PROCESS_ANSWER:
-            console.log(data.answer)
             return {...state,
-                total: state.total + data.answer.weight,
+                total: state.total + parseInt(data.answer.weight, 10),
                 scales: {...state.scales,
-                    [data.scale]: (state.scales[data.scale]) || 0 + data.answer.weight
+                    [data.scale]: (state.scales[data.scale] || 0) + parseInt(data.answer.weight, 10)
             }}
         case ACTION.TEST_PROCESS_FINISH:
             return {...state, result: data.result}

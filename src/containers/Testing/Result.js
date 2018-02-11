@@ -60,9 +60,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createResults: dispatch(saveResults()),
-        saveResults: dispatch(saveResults()),
-        loadResults: dispatch(loadResults())
+        createResults: () => dispatch(saveResults()),
+        saveResults: () => dispatch(saveResults()),
+        loadResults: () => dispatch(loadResults())
     }
 }
 
