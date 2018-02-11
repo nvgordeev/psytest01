@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import App from './App'
+import App from './containers/App/App'
 import MainPage from "./containers/MainPage/MainPage";
 import Registration from "./containers/Testing/Registration";
 import Test from "./containers/Testing/Test/Test";
