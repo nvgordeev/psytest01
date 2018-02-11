@@ -1,7 +1,45 @@
 import React, { Component } from 'react';
 import EditableAnswer from "./EditableAnswer";
+import uuidv1 from 'uuid/v1'
+import Select from "../../components/Select";
+import {SCALES} from "../../constants";
 
 class EditableQuestion extends Component {
+
+    handleCreateAnswer = () => {
+        this.props.onUpdate({
+            ...this.props.item,
+            answers: [...this.props.item.answers, {
+                id: uuidv1(),
+                text: '',
+                weight: 0,
+                order: this.props.item.answers.length
+            }]
+        })
+    }
+
+    handleUpdateAnswer = (answer) => {
+        let answers = this.props.item.answers.slice()
+        let changedAnswerIndex = answers.map(a => a.id).indexOf(answer.id)
+        if (changedAnswerIndex !== -1) {
+            answers[changedAnswerIndex] = answer
+        }
+        this.props.onUpdate({
+            ...this.props.item,
+            answers
+        })
+    }
+
+    handleDeleteAnswer = (answer) => {
+        this.props.onUpdate({
+            ...this.props.item,
+            answers: this.props.item.answers.filter(a => a.id !== answer.id)
+        })
+    }
+
+    handleChange = (e) => {
+        this.props.onUpdate({...this.props.item, [e.target.name]: e.target.value})
+    }
 
     render() {
         const {number, item} = this.props
@@ -11,6 +49,10 @@ class EditableQuestion extends Component {
                     {number + 1}.
                 </div>
                 <div className="col-10">
+                    Шкала:
+                    <Select name='scale' value={item.scale} onChange={this.handleChange}>
+                        {Object.keys(SCALES).map(s => <option key={s} value={s}>{s}</option>)}
+                    </Select>
                     <table className="table">
                         <thead>
                             <tr>
@@ -20,11 +62,14 @@ class EditableQuestion extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {item.answers.map((a, index) => <EditableAnswer key={index} item={a}/>)}
+                            {item.answers.map(a => <EditableAnswer key={a.id}
+                                                                   item={a}
+                                                                   onUpdate={this.handleUpdateAnswer}
+                                                                   onDelete={this.handleDeleteAnswer} />)}
                         </tbody>
                     </table>
-                    <button className='btn btn-success'>Добавить вариант ответа</button>
-                    <button className='btn btn-danger'>Удалить вопрос</button>
+                    <button className='btn btn-success' onClick={this.handleCreateAnswer}>Добавить вариант ответа</button>
+                    <button className='btn btn-danger' onClick={this.props.onDelete}>Удалить вопрос</button>
                 </div>
             </div>
         )

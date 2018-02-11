@@ -7,10 +7,17 @@ export const API_ACTION_STATUS = {
 }
 
 export const API_ACTION_TYPE = {
-    FETCHING: 'FETCHING',
     LOAD_LIST: 'LOAD_LIST',
-    GET: 'GET',
+    SAVE_LIST: 'SAVE_LIST',
     CREATE: 'CREATE',
     UPDATE: 'UPDATE',
     DELETE: 'DELETE',
+}
+
+export const SCALES = {
+    A: 'A',
+    B: 'B',
+    C: 'C',
+    D: 'D',
+    'E': 'E'
 }
