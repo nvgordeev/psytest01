@@ -49,10 +49,16 @@ class EditableQuestion extends Component {
                     {number + 1}.
                 </div>
                 <div className="col-10">
-                    Шкала:
-                    <Select name='scale' value={item.scale} onChange={this.handleChange}>
-                        {Object.keys(SCALES).map(s => <option key={s} value={s}>{s}</option>)}
-                    </Select>
+                    <div className='row'>
+                        <div className='col-2'>
+                            <label>Шкала:</label>
+                        </div>
+                        <div className='col-8'>
+                             <Select name='scale' value={item.scale} onChange={this.handleChange}>
+                                {Object.keys(SCALES).map(s => <option key={s} value={s}>{s}</option>)}
+                            </Select>
+                        </div>
+                    </div>
                     <table className="table">
                         <thead>
                             <tr>

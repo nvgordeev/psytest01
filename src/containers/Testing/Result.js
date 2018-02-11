@@ -12,7 +12,6 @@ class Result extends Component {
     }
 
     render() {
-        console.log(this.props.testing)
         const {person} = this.props.testing
         if (!person) return <div>нет данных</div>
         return (
