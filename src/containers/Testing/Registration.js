@@ -21,8 +21,14 @@ class Registration extends Component {
         })
     }
 
+    getAge = (birthDate) => {
+        const ageDifMs = Date.now() - new Date(birthDate).getTime();
+        const ageDate = new Date(ageDifMs);
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
     handleStart = () => {
-        this.props.startTesting(this.state.data)
+        this.props.startTesting({...this.state.data, age: this.getAge(this.state.data.birthDate)})
         this.props.history.push(ROUTES.TESTING.TEST)
     }
 

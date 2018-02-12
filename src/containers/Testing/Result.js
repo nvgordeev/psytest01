@@ -38,7 +38,7 @@ class Result extends Component {
         const {person, tMatrix} = this.props.testing
         if (!person) return <div>нет данных</div>
         if (!tMatrix) return <div>Загружается Т-матрица</div>
-        const age = new Date().getFullYear() - new Date(person.birthDate).getFullYear()
+        const {age} = person
         const ageRange = this.getAgeRange(age)
         const totalTIndex =  ageRange && tMatrix[`total_${person.gender}_${ageRange}`][this.props.testing.total]
         const totalTIndexInterpretation =  totalTIndex && this.getInterpretation(totalTIndex)
