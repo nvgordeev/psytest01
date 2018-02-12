@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import EditableQuestion from "./EditableQuestion";
 import uuidv1 from 'uuid/v1'
 import {SCALES} from "../../constants";
+import settings from "../../settings";
 
 class Editor extends Component {
 
@@ -12,22 +13,31 @@ class Editor extends Component {
     }
 
     handleCreate = () => {
-        this.props.createQuestion({
-            id: uuidv1(),
-            scale: SCALES.A,
-            order: this.props.questions.length,
-            answers: [
-                {
-                    id: uuidv1(),
-                    text: 'Введите утверждение',
-                    weight: 0
-                }
-            ]
-        })
+        if (!settings.EDITOR_READ_ONLY_MODE) {
+            this.props.createQuestion({
+                id: uuidv1(),
+                scale: SCALES.A,
+                order: this.props.questions.length,
+                answers: [
+                    {
+                        id: uuidv1(),
+                        text: 'Введите утверждение',
+                        weight: 0
+                    }
+                ]
+            })
+        } else {
+            alert('Редактор находится в режиме чтения')
+        }
+
     }
 
     handleSave = () => {
-        this.props.saveQuestions(this.props.questions)
+        if (!settings.EDITOR_READ_ONLY_MODE) {
+            this.props.saveQuestions(this.props.questions)
+        } else {
+            alert('Редактор находится в режиме чтения')
+        }
     }
 
     render() {
@@ -38,7 +48,7 @@ class Editor extends Component {
                     <h2>Редактор</h2>
                 </div>
                 <div className="col-12">
-                    {!saved && <button onClick={this.handleSave} className="btn btn-primary">Сохранить</button>}
+                    {!settings.EDITOR_READ_ONLY_MODE && !saved && <button onClick={this.handleSave} className="btn btn-primary">Сохранить</button>}
                     <button onClick={this.handleCreate} className="btn btn-primary">Добавить вопрос</button>
                 </div>
                 <div className="col-12">

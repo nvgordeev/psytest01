@@ -1,6 +1,7 @@
 import React from 'react'
 import {ROUTES} from "../../constants/routes";
 import {Link} from "react-router-dom";
+import settings from "../../settings";
 
 export default () => (
      <div className='dropdown'>
@@ -9,7 +10,7 @@ export default () => (
         </button>
         <div className={'dropdown-menu'}>
             <Link className={'dropdown-item'} to={ROUTES.ROOT}>Главная страница</Link>
-            <Link className={'dropdown-item'} to={ROUTES.EDITOR}>Редактор вопросов</Link>
+            {settings.ENABLE_EDITOR && <Link className={'dropdown-item'} to={ROUTES.EDITOR}>Редактор вопросов</Link>}
             <Link className={'dropdown-item'} to={ROUTES.TESTING.REGISTRATION}>Тестирование</Link>
             <Link className={'dropdown-item'} to={ROUTES.OVERVIEW}>Результаты</Link>
         </div>
