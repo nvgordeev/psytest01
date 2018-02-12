@@ -5,6 +5,7 @@ const ENDPOINTS = {
     QUESTIONS: 'data/questions.json',
     PERSONS: 'data/persons.json',
     RESULTS: 'data/results.json',
+    T_MATRIX: 'data/t-matrix.json'
 }
 
 function loadJSONFromFile(fileName) {
@@ -37,5 +38,6 @@ function apiFuncFactory(endpoint) {
 export default {
     questions: apiFuncFactory(ENDPOINTS.QUESTIONS),
     persons: apiFuncFactory(ENDPOINTS.PERSONS),
-    results: apiFuncFactory(ENDPOINTS.RESULTS)
+    results: apiFuncFactory(ENDPOINTS.RESULTS),
+    tMatrix: apiFuncFactory(ENDPOINTS.T_MATRIX)
 }

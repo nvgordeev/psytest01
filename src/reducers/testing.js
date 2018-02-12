@@ -4,7 +4,9 @@ const initialState = {
     person: null,
     total: 0,
     scales: {},
-    result: null,
+    tMatrix: null,
+    fetching: false,
+    errors: null
 }
 
 export function testingReducer(state=initialState, action) {
@@ -18,8 +20,12 @@ export function testingReducer(state=initialState, action) {
                 scales: {...state.scales,
                     [data.scale]: (state.scales[data.scale] || 0) + parseInt(data.answer.weight, 10)
             }}
-        case ACTION.TEST_PROCESS_FINISH:
-            return {...state, result: data.result}
+        case ACTION.TEST_PROCESS_LOADING_T_MATRIX_START:
+            return {...state, fetching: true}
+        case ACTION.TEST_PROCESS_LOADING_T_MATRIX_ERROR:
+            return {...state, fetching: false, errors: data}
+        case ACTION.TEST_PROCESS_LOADING_T_MATRIX_FINISH:
+            return {...state, fetching: false, tMatrix: data}
         default:
             return state
     }
