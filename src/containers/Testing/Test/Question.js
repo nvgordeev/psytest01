@@ -29,7 +29,7 @@ class Question extends Component {
         const {selectedAnswer} = this.state
         return (
             <div className="row">
-                <div className='col-12'>
+                <div className='col-12' style={{marginBottom: "30px"}}>
                     <h2>Выберите верное утверждение</h2>
                 </div>
                 <div className='col-12'>
@@ -45,7 +45,7 @@ class Question extends Component {
                     ))}
                 </div>
                 <div className='col-12' style={{marginTop: "30px"}}>
-                    {selectedAnswer && <button className='btn btn-lg btn-success' onClick={() => onAnswer(selectedAnswer)}>Ответить</button>}
+                    {selectedAnswer && <button className='btn btn-lg btn-block btn-success' onClick={() => onAnswer(selectedAnswer)}>Ответить</button>}
                 </div>
 
             </div>

@@ -22,9 +22,7 @@ class Test extends Component {
     }
 
     componentDidMount() {
-        if (this.props.questions.items.length === 0 && !this.props.questions.fetching) {
-            this.props.loadQuestions()
-        }
+        this.props.loadQuestions()
     }
 
     handleAnswer = (answer) => {
@@ -44,7 +42,18 @@ class Test extends Component {
         const question = questions.items[this.state.questionNumber]
         if (!question) return <div>Загрузка</div>
         return (
-            <Question item={question} onAnswer={this.handleAnswer}/>
+            <div>
+                <div className='row'>
+                    <div className='col-12' style={{marginBottom: "30px"}}>
+                        <div className="progress">
+                            <div className="progress-bar" role="progressbar" style={{width: parseInt(question.order, 10) / questions.items.length * 100 + '%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                {question.order}/{questions.items.length}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <Question item={question} onAnswer={this.handleAnswer}/>
+            </div>
         )
     }
 }

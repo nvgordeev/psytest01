@@ -42,7 +42,7 @@ class Registration extends Component {
                         <option value={'m'}>Мужской</option>
                         <option value={'f'}>Женский</option>
                     </Select>
-                    {formValid && <button onClick={this.handleStart} className="btn btn-lg btn-primary">Начать тест</button>}
+                    {formValid && <button onClick={this.handleStart} className="btn btn-lg btn-block btn-primary">Начать тест</button>}
                 </div>
             </div>
         )
