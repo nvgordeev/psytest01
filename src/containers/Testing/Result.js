@@ -24,12 +24,12 @@ class Result extends Component {
     getInterpretation = (tIndex) => {
         if (tIndex > 70) return 'Очень значительно превышает средний'
         if (tIndex >= 66 && tIndex < 70) return 'Значительно выше среднего'
-        if (tIndex >= 61 && tIndex < 65) return 'Выше среднего'
-        if (tIndex >= 56 && tIndex < 60) return 'Чуть выше среднего'
-        if (tIndex >= 45 && tIndex < 55) return 'Средний'
-        if (tIndex >= 40 && tIndex < 44) return 'Чуть ниже среднего'
-        if (tIndex >= 35 && tIndex < 39) return 'Ниже среднего'
-        if (tIndex >= 30 && tIndex < 34) return 'Много ниже среднего'
+        if (tIndex >= 61 && tIndex <= 65) return 'Выше среднего'
+        if (tIndex >= 56 && tIndex <= 60) return 'Чуть выше среднего'
+        if (tIndex >= 45 && tIndex <= 55) return 'Средний'
+        if (tIndex >= 40 && tIndex <= 44) return 'Чуть ниже среднего'
+        if (tIndex >= 35 && tIndex <= 39) return 'Ниже среднего'
+        if (tIndex >= 30 && tIndex <= 34) return 'Много ниже среднего'
         if (tIndex < 30) return 'Значительно ниже среднего'
         return ''
     }
