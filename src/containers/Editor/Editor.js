@@ -16,7 +16,7 @@ class Editor extends Component {
         if (!settings.EDITOR_READ_ONLY_MODE) {
             this.props.createQuestion({
                 id: uuidv1(),
-                scale: SCALES.A,
+                scale: SCALES[0].name,
                 order: this.props.questions.length,
                 answers: [
                     {

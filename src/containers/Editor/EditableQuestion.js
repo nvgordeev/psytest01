@@ -55,7 +55,7 @@ class EditableQuestion extends Component {
                         </div>
                         <div className='col-8'>
                              <Select name='scale' value={item.scale} onChange={this.handleChange}>
-                                {Object.keys(SCALES).map(s => <option key={s} value={s}>{s}</option>)}
+                                {SCALES.map(s => <option key={s.name} value={s.name}>{`${s.name} ${s.description}`}</option>)}
                             </Select>
                         </div>
                     </div>

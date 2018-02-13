@@ -3,7 +3,7 @@ import withRouter from "react-router-dom/es/withRouter";
 import {connect} from "react-redux";
 import {ROUTES} from "../../constants/routes";
 import {loadTMatrix} from "../../actions/testing";
-
+import {SCALES} from '../../constants'
 class Result extends Component {
 
     componentWillMount() {
@@ -42,11 +42,13 @@ class Result extends Component {
         const ageRange = this.getAgeRange(age)
         const totalTIndex =  ageRange && tMatrix[`total_${person.gender}_${ageRange}`][this.props.testing.total]
         const totalTIndexInterpretation =  totalTIndex && this.getInterpretation(totalTIndex)
-        const scalesWithTIndex = Object.keys(this.props.testing.scales).map(k => {
-            const tIndex = ageRange && tMatrix[`scale_${k.toLowerCase()}_${person.gender}_${ageRange}`][this.props.testing.scales[k]]
+        const scalesWithTIndex = SCALES.map(s => {
+            const tIndex = ageRange && tMatrix[`scale_${s.name.toLowerCase()}_${person.gender}_${ageRange}`][this.props.testing.scales[s.name]]
             return {
-                name: k,
-                value: this.props.testing.scales[k],
+                name: s.name,
+                description: s.description,
+                extendedDescription: s.extendedDescription,
+                value: this.props.testing.scales[s.name],
                 tIndex,
                 interpretation: tIndex && this.getInterpretation(tIndex)
         }})
@@ -81,11 +83,27 @@ class Result extends Component {
                     <p><strong>Общий балл: {this.props.testing.total}</strong></p>
                     <p><strong>Общий Т-показатель: {totalTIndex || 'не определен'} ({totalTIndexInterpretation || 'невозможно интерпретировать'})</strong></p>
                     <p><strong>Данные по шкалам</strong></p>
-                    {scalesWithTIndex.map(scale => <p key={scale.name}>
-                        Шкала {scale.name}: {scale.value}, Т-показатель: {scale.tIndex || 'не определен'} ({scale.interpretation || 'невозможно интерпретировать'})
-                    </p>)}
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th>Шкала</th>
+                                <th>Описание</th>
+                                <th>Сумма баллов</th>
+                                <th>Т-показатель</th>
+                                <th>Интерпретация</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {scalesWithTIndex.map(scale => <tr key={scale.name}>
+                                <td>{scale.name}</td>
+                                <td>{`${scale.description} - ${scale.extendedDescription}`}</td>
+                                <td>{scale.value}</td>
+                                <td>{scale.tIndex || 'не определен'}</td>
+                                <td>({scale.interpretation || 'невозможно интерпретировать'})</td>
+                            </tr>)}
+                        </tbody>
+                    </table>
                 </div>
-                
             </div>
         )
     }
