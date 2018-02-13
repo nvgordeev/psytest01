@@ -80,6 +80,9 @@ class Result extends Component {
     }
 
     handleSaveResults = () => {
+        this.setState({
+            saved: true
+        })
         this.props.loadResults().then((results) => {
             this.props.saveResults([...results, this.state.result])
         })
