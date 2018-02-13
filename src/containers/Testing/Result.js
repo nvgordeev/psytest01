@@ -4,7 +4,50 @@ import {connect} from "react-redux";
 import {ROUTES} from "../../constants/routes";
 import {loadTMatrix} from "../../actions/testing";
 import {SCALES} from '../../constants'
+import {loadResults, saveResults} from "../../actions/result";
 class Result extends Component {
+
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            result: null,
+            ready: false,
+            saved: false
+        }
+    }
+
+    getResult = () => {
+        const {person, tMatrix}  = this.props.testing
+        const ageRange = this.getAgeRange(person.age)
+        const totalTIndex =  ageRange && tMatrix[`total_${person.gender}_${ageRange}`][this.props.testing.total]
+        const totalTIndexInterpretation =  totalTIndex && this.getInterpretation(totalTIndex)
+        const scalesWithTIndex = SCALES.map(s => {
+            const tIndex = ageRange && tMatrix[`scale_${s.name.toLowerCase()}_${person.gender}_${ageRange}`][this.props.testing.scales[s.name]]
+            return {
+                name: s.name,
+                description: s.description,
+                extendedDescription: s.extendedDescription,
+                value: this.props.testing.scales[s.name],
+                tIndex,
+                interpretation: tIndex && this.getInterpretation(tIndex)
+        }})
+        this.setState({
+            result: {
+                person,
+                totalTIndex,
+                totalTIndexInterpretation,
+                scalesWithTIndex
+            }
+        })
+    }
+
+
+    componentDidUpdate() {
+        if (!this.state.ready && this.props.testing.person && this.props.testing.tMatrix) {
+            this.setState({ready: true}, this.getResult)
+        }
+    }
 
     componentWillMount() {
         if (!this.props.testing.person) {
@@ -34,24 +77,16 @@ class Result extends Component {
         return ''
     }
 
+    handleSaveResults = () => {
+        this.props.loadResults().then((results) => {
+            this.props.saveResults([...results, this.state.result])
+        })
+    }
+
     render() {
-        const {person, tMatrix} = this.props.testing
-        if (!person) return <div>нет данных</div>
-        if (!tMatrix) return <div>Загружается Т-матрица</div>
-        const {age} = person
-        const ageRange = this.getAgeRange(age)
-        const totalTIndex =  ageRange && tMatrix[`total_${person.gender}_${ageRange}`][this.props.testing.total]
-        const totalTIndexInterpretation =  totalTIndex && this.getInterpretation(totalTIndex)
-        const scalesWithTIndex = SCALES.map(s => {
-            const tIndex = ageRange && tMatrix[`scale_${s.name.toLowerCase()}_${person.gender}_${ageRange}`][this.props.testing.scales[s.name]]
-            return {
-                name: s.name,
-                description: s.description,
-                extendedDescription: s.extendedDescription,
-                value: this.props.testing.scales[s.name],
-                tIndex,
-                interpretation: tIndex && this.getInterpretation(tIndex)
-        }})
+        const {result, saved} = this.state
+        if (!result) return <div>Обработка данных...</div>
+        const {person, totalTIndex, totalTIndexInterpretation, scalesWithTIndex} = result
         return (
             <div className="row">
                 <div className='col-12'>
@@ -70,7 +105,7 @@ class Result extends Component {
                             </tr>
                             <tr>
                                 <td>Возраст: </td>
-                                <td>{age}</td>
+                                <td>{person.age}</td>
                             </tr>
                             <tr>
                                 <td>Пол: </td>
@@ -99,10 +134,13 @@ class Result extends Component {
                                 <td>{`${scale.description} - ${scale.extendedDescription}`}</td>
                                 <td>{scale.value}</td>
                                 <td>{scale.tIndex || 'не определен'}</td>
-                                <td>({scale.interpretation || 'невозможно интерпретировать'})</td>
+                                <td>{scale.interpretation || 'невозможно интерпретировать'}</td>
                             </tr>)}
                         </tbody>
                     </table>
+                </div>
+                <div className='col-12' style={{marginBottom: "30px"}}>
+                    {!saved && <button onClick={this.handleSaveResults} className='btn btn-primary btn-block'>Сохранить результаты</button>}
                 </div>
             </div>
         )
@@ -118,7 +156,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        loadTMatrix: () => dispatch(loadTMatrix())
+        loadTMatrix: () => dispatch(loadTMatrix()),
+        loadResults: () => dispatch(loadResults()),
+        saveResults: (data) => dispatch(saveResults(data)),
     }
 }
 
