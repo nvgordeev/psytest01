@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import withRouter from "react-router-dom/es/withRouter";
 import {loadResults} from "../../actions/result";
 import Input from "../../components/Input";
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../constants/routes";
 
 class Overview extends Component {
 
@@ -49,8 +51,8 @@ class Overview extends Component {
                         </thead>
                         <tbody>
                             {filteredResults.map(r => (
-                                <tr>
-                                    <td>{r.person.fullName}</td>
+                                <tr key={r.id}>
+                                    <td><Link to={ROUTES.OVERVIEW + r.id}>{r.person.fullName}</Link></td>
                                     <td>{r.person.birthDate}</td>
                                     <td>{r.person.age}</td>
                                     <td>{r.person.gender === 'm'? 'М' : 'Ж'}</td>

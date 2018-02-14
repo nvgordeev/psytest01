@@ -6,6 +6,8 @@ import {loadTMatrix} from "../../actions/testing";
 import {SCALES} from '../../constants'
 import {loadResults, saveResults} from "../../actions/result";
 import ResultBlock from "../../components/ResultBlock";
+import uuidv1 from 'uuid/v1'
+
 class Result extends Component {
 
 
@@ -80,11 +82,12 @@ class Result extends Component {
     }
 
     handleSaveResults = () => {
+        if (this.state.saved) {return}
         this.setState({
             saved: true
         })
         this.props.loadResults().then((results) => {
-            this.props.saveResults([...results, this.state.result])
+            this.props.saveResults([...results, {...this.state.result, id: uuidv1()}])
         })
     }
 

@@ -9,6 +9,7 @@ import Result from "./containers/Testing/Result";
 import Editor from "./containers/Editor/Editor";
 import Overview from "./containers/Overview/Overview";
 import { ROUTES } from './constants/routes'
+import OverviewDetails from "./containers/Overview/OverviewDetails";
 
 export default () =>
     <BrowserRouter>
@@ -19,6 +20,7 @@ export default () =>
                     <Route path={ROUTES.TESTING.TEST} component={Test}/>
                     <Route path={ROUTES.TESTING.RESULT} component={Result}/>
                     <Route path={ROUTES.EDITOR} component={Editor}/>
+                    <Route exact path={ROUTES.OVERVIEW + ':id'} component={OverviewDetails}/>
                     <Route path={ROUTES.OVERVIEW} component={Overview}/>
                 </Switch>
             </App>
