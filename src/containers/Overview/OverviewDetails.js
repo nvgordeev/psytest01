@@ -21,7 +21,7 @@ class OverviewDetails extends Component {
         }
         return (
             <div className="row">
-                <h2>Рузультаты тестирования</h2>
+                <h2>Результаты тестирования</h2>
                 <ResultBlock result={result} />
             </div>
         )
