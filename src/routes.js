@@ -22,6 +22,7 @@ export default () =>
                     <Route path={ROUTES.EDITOR} component={Editor}/>
                     <Route exact path={ROUTES.OVERVIEW + ':id'} component={OverviewDetails}/>
                     <Route path={ROUTES.OVERVIEW} component={Overview}/>
+                    <Route component={MainPage} />
                 </Switch>
             </App>
     </BrowserRouter>
