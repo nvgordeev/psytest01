@@ -1,7 +1,7 @@
 export const ROUTES =  {
     ROOT: '/',
     EDITOR: '/editor/',
-    OVERVIEW: 'overview/',
+    OVERVIEW: '/overview/',
     TESTING: {
         REGISTRATION: '/testing/register/',
         TEST: '/testing/test/',
