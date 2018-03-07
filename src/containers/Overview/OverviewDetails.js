@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import withRouter from "react-router-dom/es/withRouter";
 import {loadResults} from "../../actions/result";
 import ResultBlock from "../../components/ResultBlock";
+import {startPrinting} from "../../actions/pdfPrinter";
+import '../../utils/printToPdf'
 
 class OverviewDetails extends Component {
 
@@ -15,13 +17,14 @@ class OverviewDetails extends Component {
 
 
     render() {
-        const {result} = this.props
+        const {result, print} = this.props
         if (!result) {
             return <div>нет данных</div>
         }
         return (
             <div className="row">
                 <h2>Результаты тестирования</h2>
+                {!print && <button className={'btn btn-default'} onClick={this.props.startPrinting}>Печать</button>}
                 <ResultBlock result={result} />
             </div>
         )
@@ -31,13 +34,15 @@ class OverviewDetails extends Component {
 function mapStateToProps(state, ownProps) {
     return {
         results: state.results.items,
-        result: state.results.items.filter(r => r.id === ownProps.match.params['id'])[0]
+        result: state.results.items.filter(r => r.id === ownProps.match.params['id'])[0],
+        print: state.pdfPrinter.print
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         loadResults: () => dispatch(loadResults()),
+        startPrinting: () => dispatch(startPrinting())
     }
 }
 

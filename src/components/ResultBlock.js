@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from "moment";
 
 export default ({result}) => (
     <div>
@@ -11,7 +12,7 @@ export default ({result}) => (
                     </tr>
                     <tr>
                         <td>Дата рождения: </td>
-                        <td>{result.person.birthDate}</td>
+                        <td>{moment(result.person.birthDate).format('L')}</td>
                     </tr>
                     <tr>
                         <td>Возраст: </td>
