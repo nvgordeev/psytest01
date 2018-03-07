@@ -24,7 +24,7 @@ function createWindow () {
   mainWindow.loadURL(startUrl);
 
   // Open the DevTools.
-  if (process.env.ELECTRON_START_URL) {
+  if (process.env.DEVELOPMENT_MODE) {
       mainWindow.webContents.openDevTools()
   }
 
