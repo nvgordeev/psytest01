@@ -12,7 +12,7 @@ export default ({result}) => (
                     </tr>
                     <tr>
                         <td>Дата рождения: </td>
-                        <td>{moment(result.person.birthDate).format('L')}</td>
+                        <td>{moment(result.person.birthDate).format('DD.MM.YYYY')}</td>
                     </tr>
                     <tr>
                         <td>Возраст: </td>

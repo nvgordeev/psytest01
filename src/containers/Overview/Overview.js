@@ -5,6 +5,7 @@ import {loadResults} from "../../actions/result";
 import Input from "../../components/Input";
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../constants/routes";
+import moment from "moment";
 
 class Overview extends Component {
 
@@ -53,7 +54,7 @@ class Overview extends Component {
                             {filteredResults.map(r => (
                                 <tr key={r.id}>
                                     <td><Link to={ROUTES.OVERVIEW + r.id}>{r.person.fullName}</Link></td>
-                                    <td>{r.person.birthDate}</td>
+                                    <td>{moment(r.person.birthDate).format('DD.MM.YYYY')}</td>
                                     <td>{r.person.age}</td>
                                     <td>{r.person.gender === 'm'? 'М' : 'Ж'}</td>
                                     <td>{r.total}</td>
