@@ -17,7 +17,7 @@ class OverviewDetails extends Component {
 
 
     render() {
-        const {result, print} = this.props
+        const {result, print, startPrinting} = this.props
         if (!result) {
             return <div>нет данных</div>
         }
@@ -27,7 +27,7 @@ class OverviewDetails extends Component {
                     <h2>Результаты тестирования</h2>
                 </div>
                 <div className={'col-2'}>
-                    {!print && <button className={'btn btn-default'} onClick={this.props.startPrinting}>Печать</button>}
+                    {!print && <button className={'btn btn-default'} onClick={startPrinting}>Печать</button>}
                 </div>
                 <ResultBlock result={result} />
             </div>

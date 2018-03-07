@@ -7,6 +7,7 @@ import {SCALES} from '../../constants'
 import {loadResults, saveResults} from "../../actions/result";
 import ResultBlock from "../../components/ResultBlock";
 import uuidv1 from 'uuid/v1'
+import {startPrinting} from "../../actions/pdfPrinter";
 
 class Result extends Component {
 
@@ -93,15 +94,19 @@ class Result extends Component {
 
     render() {
         const {result, saved} = this.state
+        const {print, startPrinting} = this.props
         if (!result) return <div>Обработка данных...</div>
         return (
             <div className="row">
-                <div className='col-12'>
-                    <h2>Результат тестирования</h2>
+                <div className={'col-10'}>
+                    <h2>Результаты тестирования</h2>
+                </div>
+                <div className={'col-2'}>
+                    {!print && <button className={'btn btn-default'} onClick={startPrinting}>Печать</button>}
                 </div>
                 <ResultBlock result={result} />
                 <div className='col-12' style={{marginBottom: "30px"}}>
-                    {!saved && <button onClick={this.handleSaveResults} className='btn btn-primary btn-block'>Сохранить результаты</button>}
+                    {!print && !saved && <button onClick={this.handleSaveResults} className='btn btn-primary btn-block'>Сохранить результаты</button>}
                 </div>
             </div>
         )
@@ -112,6 +117,7 @@ function mapStateToProps(state) {
     return {
         questions: state.questions,
         testing: state.testing,
+        print: state.pdfPrinter.print
     }
 }
 
@@ -120,6 +126,7 @@ function mapDispatchToProps(dispatch) {
         loadTMatrix: () => dispatch(loadTMatrix()),
         loadResults: () => dispatch(loadResults()),
         saveResults: (data) => dispatch(saveResults(data)),
+        startPrinting: () => dispatch(startPrinting())
     }
 }
 
