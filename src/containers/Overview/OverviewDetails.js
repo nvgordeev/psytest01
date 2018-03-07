@@ -23,8 +23,12 @@ class OverviewDetails extends Component {
         }
         return (
             <div className="row">
-                <h2>Результаты тестирования</h2>
-                {!print && <button className={'btn btn-default'} onClick={this.props.startPrinting}>Печать</button>}
+                <div className={'col-10'}>
+                    <h2>Результаты тестирования</h2>
+                </div>
+                <div className={'col-2'}>
+                    {!print && <button className={'btn btn-default'} onClick={this.props.startPrinting}>Печать</button>}
+                </div>
                 <ResultBlock result={result} />
             </div>
         )
