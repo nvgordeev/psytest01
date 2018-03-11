@@ -16,19 +16,19 @@ function loadJSONFromFile(fileName) {
                 return reject("An error ocurred reading the file :" + err.message);
             }
             return resolve(JSON.parse(data))
-        }
-    )}
-    )
+        })
+    })
 }
 
 function saveJSONToFile(fileName, content) {
     return new Promise((resolve, reject) => {
         fs.writeFile(fileName, JSON.stringify(content), (err) => {
-        if(err){
-            return reject("An error ocurred writing the file :" + err.message);
-        }
-        return resolve(content)
-    })})
+            if(err){
+                return reject("An error ocurred writing the file :" + err.message);
+            }
+            return resolve(content)
+        })
+    })
 }
 
 function apiFuncFactory(endpoint) {
