@@ -34,7 +34,9 @@ function saveJSONToFile(fileName, content) {
 function apiFuncFactory(endpoint) {
     return {
         loadList: () => loadJSONFromFile(endpoint),
-        saveList: (content) => saveJSONToFile(endpoint, content),
+        saveList: (content) => loadJSONFromFile(endpoint)
+            .then(fileData => fileData, () => [])
+            .then((fileData) => saveJSONToFile(endpoint, [...fileData, content]))
     }
 }
 

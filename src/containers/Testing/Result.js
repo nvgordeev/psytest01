@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {ROUTES} from "../../constants/routes";
 import {loadTMatrix} from "../../actions/testing";
 import {SCALES} from '../../constants'
-import {loadResults, saveResults} from "../../actions/result";
+import {saveResults} from "../../actions/result";
 import ResultBlock from "../../components/ResultBlock";
 import uuidv1 from 'uuid/v1'
 import {startPrinting} from "../../actions/pdfPrinter";
@@ -87,9 +87,7 @@ class Result extends Component {
         this.setState({
             saved: true
         })
-        this.props.loadResults().then((results) => {
-            this.props.saveResults([...results, {...this.state.result, id: uuidv1()}])
-        })
+        this.props.saveResults({...this.state.result, id: uuidv1()})
     }
 
     render() {
@@ -124,7 +122,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         loadTMatrix: () => dispatch(loadTMatrix()),
-        loadResults: () => dispatch(loadResults()),
         saveResults: (data) => dispatch(saveResults(data)),
         startPrinting: () => dispatch(startPrinting())
     }
