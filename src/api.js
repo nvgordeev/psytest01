@@ -5,7 +5,7 @@ const resourcesPath = !electron.remote.process.env.DEVELOPMENT_MODE && path.join
 
 const ENDPOINTS = {
     QUESTIONS: path.join(resourcesPath || '', 'data/questions.json'),
-    RESULTS: path.join(electron.remote.app.getPath('userData'), 'results.json'),
+    RESULTS: path.join(resourcesPath || '', 'data/results.json'),
     T_MATRIX: path.join(resourcesPath || '', 'data/t-matrix.json')
 }
 
