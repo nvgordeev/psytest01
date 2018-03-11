@@ -12,20 +12,22 @@ const ENDPOINTS = {
 function loadJSONFromFile(fileName) {
     return new Promise((resolve, reject) => {
         fs.readFile(fileName, 'utf-8', (err, data) => {
-        if(err){
-            reject("An error ocurred reading the file :" + err.message);
+            if(err){
+                return reject("An error ocurred reading the file :" + err.message);
+            }
+            return resolve(JSON.parse(data))
         }
-        resolve(JSON.parse(data))
-    })})
+    )}
+    )
 }
 
 function saveJSONToFile(fileName, content) {
     return new Promise((resolve, reject) => {
         fs.writeFile(fileName, JSON.stringify(content), (err) => {
         if(err){
-            reject("An error ocurred writing the file :" + err.message);
+            return reject("An error ocurred writing the file :" + err.message);
         }
-        resolve(content)
+        return resolve(content)
     })})
 }
 
