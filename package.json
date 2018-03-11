@@ -26,7 +26,7 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "dev": "nf start",
-    "package-win": "yarn build && electron-packager . psytest --ignore=node_modules --ignore=utils --overwrite --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Covacs test\""
+    "package-win": "yarn build && electron-packager . psytest --ignore=node_modules --ignore=utils --ignore=results.json --ignore=.idea --ignore=build --overwrite --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Covacs test\""
   },
   "devDependencies": {
     "foreman": "^2.0.0"
