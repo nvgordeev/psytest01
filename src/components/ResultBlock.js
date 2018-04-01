@@ -22,6 +22,10 @@ export default ({result}) => (
                         <td>Пол: </td>
                         <td>{result.person.gender === 'm'? "мужской" : "женский"}</td>
                     </tr>
+                    <tr>
+                        <td>Дата и время прохождения теста: </td>
+                        <td>{result.datetime? moment(result.datetime).format('DD.MM.YYYY HH:mm') : 'неизвестно'}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

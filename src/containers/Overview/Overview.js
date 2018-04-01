@@ -41,6 +41,7 @@ class Overview extends Component {
                     <table className='table'>
                         <thead>
                         <tr>
+                            <th>Дата тестирования</th>
                             <th>ФИО</th>
                             <th>Дата рождения</th>
                             <th>Возраст</th>
@@ -53,6 +54,7 @@ class Overview extends Component {
                         <tbody>
                             {filteredResults.map(r => (
                                 <tr key={r.id}>
+                                    <td>{r.datetime? moment(r.datetime).format('DD.MM.YYYY HH:mm') : 'неизвестно'}</td>
                                     <td><Link to={ROUTES.OVERVIEW + r.id}>{r.person.fullName}</Link></td>
                                     <td>{moment(r.person.birthDate).format('DD.MM.YYYY')}</td>
                                     <td>{r.person.age}</td>
@@ -72,7 +74,7 @@ class Overview extends Component {
 
 function mapStateToProps(state) {
     return {
-        results: state.results.items,
+        results: state.results.items.sort((a,b) => new Date(b.datetime) - new Date(a.datetime)),
     }
 }
 
