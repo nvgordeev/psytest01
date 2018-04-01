@@ -8,7 +8,7 @@ import {saveResults} from "../../actions/result";
 import ResultBlock from "../../components/ResultBlock";
 import uuidv1 from 'uuid/v1'
 import {startPrinting} from "../../actions/pdfPrinter";
-import moment from "moment";
+
 
 class Result extends Component {
 
